@@ -1,0 +1,33 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/nguyenthaidien/dcms-config-repo.git
+          clone-on-start: true
+          default-label: main
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://10.82.14.80:8761/eureka
+    register-with-eureka: true
+    fetch-registry: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+
+logging:
+  file:
+    name: /var/log/config-server/config-server.log
+  level:
+    root: INFO
+    org.springframework.cloud.config: DEBUG
